@@ -1,17 +1,16 @@
-import { useState } from 'react';
+import { useState } from "react";
 import ReactTextareaAutosize from "react-textarea-autosize";
 
-import InputCard from './InputCard';
+import InputCard from "./InputCard";
 
 const List = ({ children, setData, data, list }) => {
-  const [isOpen, setIsOpen] = useState(false)
   const [listTitle, setListTitle] = useState();
-  const [isEdit, setIsEdit] = useState(false)
+  const [isEdit, setIsEdit] = useState(false);
   const handleEdit = async (e, listId = list.id) => {
-    data.lists[listId].listName = listTitle
-    await setData(data)
-    localStorage.setItem("data", JSON.stringify(data))
-    setIsEdit(false)
+    data.lists[listId].listName = listTitle;
+    await setData(data);
+    localStorage.setItem("data", JSON.stringify(data));
+    setIsEdit(false);
   };
   return (
     <>
@@ -22,12 +21,19 @@ const List = ({ children, setData, data, list }) => {
           className="font-extrabold bg-transparent"
           onClick={() => setIsEdit(true)}
         />
-        {isEdit && <button className='border border-2 px-2 rounded bg-gray-200' onClick={handleEdit}>save</button>}
+        {isEdit && (
+          <button
+            className="border border-2 px-2 rounded bg-gray-200"
+            onClick={handleEdit}
+          >
+            save
+          </button>
+        )}
         {children}
-        <InputCard setIsOpen={setIsOpen} isOpen={isOpen} listId={list.id} />
+        <InputCard listId={list.id} />
       </li>
     </>
   );
-}
+};
 
 export default List;

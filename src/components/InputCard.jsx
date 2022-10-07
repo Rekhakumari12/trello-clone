@@ -4,8 +4,8 @@ import { ReactComponent as PlusIcon } from "../assets/plus.svg";
 import { ReactComponent as CancelIcon } from "../assets/cancel.svg";
 import storeApi from "../utils/storeApi";
 
-const InputCard = ({ listId, addList, type }) => {
-  const { addCard } = useContext(storeApi);
+const InputCard = ({ listId, type }) => {
+  const { addCard, addList } = useContext(storeApi);
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
   const handleBtnClick = () => {

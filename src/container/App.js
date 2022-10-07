@@ -52,7 +52,7 @@ function App() {
   }
   return (
     <BoardWrapper>
-      <StoreApi.Provider value={{ addCard }}>
+      <StoreApi.Provider value={{ addCard, addList }}>
         <Fragment key={data.id}>
           <div className="board_header mb-4 text-2xl font-bold text-white">
             {data.boardName}
@@ -69,7 +69,7 @@ function App() {
               );
             })}
             <li className="list">
-              <InputCard type="list" addList={addList} />
+              <InputCard type="list" />
             </li>
           </ul>
         </Fragment>

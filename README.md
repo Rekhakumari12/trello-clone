@@ -1,3 +1,13 @@
+Trello Clone
+Create a simple webapp which
+
+1. a single board
+2. cards which represent individual tasks
+3. Lists which contain 0 or more cards
+4. Drag and drop feature to move cards between Lists
+5. Card detailed view to see the task description, title, creation time, status [basically list to which it belongs]You don't need to write a backend for the same, just mock the data as you like.
+   Some tests are expected You can share the code with us in a ZIP Folder or you can upload it on your github and share the repo with us
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

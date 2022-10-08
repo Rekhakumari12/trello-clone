@@ -7,8 +7,8 @@ const JsonData = {
       id: 'list-1',
       listName: 'To do',
       cards: [
-        { id: 1, cardName: 'Card-1', description: "Description" },
-        { id: 2, cardName: 'Card-2', description: "Description" }
+        { id: 'card-1', cardName: 'Card-1', description: "Description" },
+        { id: 'card-2', cardName: 'Card-2', description: "Description" }
       ]
     },
   },
@@ -16,17 +16,3 @@ const JsonData = {
 }
 
 export default JsonData
-//data.board.lists[]
-// ,
-// {
-//   id: 2, listName: 'Doing', cards: [
-//     { id: 1, cardName: 'Card-1', description: "Description", isEdit: false }
-//   ],
-//     isEdit: false
-// },
-// {
-//   id: 3, listName: 'Done', cards: [
-//     { id: 1, cardName: 'Card-1', description: "Description", isEdit: false }
-//   ],
-//     isEdit: false
-// }

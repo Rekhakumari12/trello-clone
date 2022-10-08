@@ -141,8 +141,3 @@ function App() {
 }
 
 export default App;
-// Todo
-/** check why description not updating
- * check on drag why list name not updating inside card
- * align-items: center; to description
- */

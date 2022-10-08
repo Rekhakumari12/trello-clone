@@ -21,13 +21,13 @@ const Card = ({ card, index, data }) => {
   const [description, setDesc] = useState(card.description)
   const [isEdit, setIsEdit] = useState(false);
   const { setData } = useContext(storeApi);
+  const setDescription = (c) => {
+    if (c.id === card.id) {
+      return c.description = description;
+    }
+  }
   const handleSubmit = () => {
-    data.lists[card.listId].cards.filter((c) => {
-      if (c.id === card.id) {
-        console.log(c)
-        return c.description = description;
-      }
-    })
+    data.lists[card.listId].cards.filter(setDescription)
     setData(data);
     localStorage.setItem("data", JSON.stringify(data));
     setIsEdit(false);

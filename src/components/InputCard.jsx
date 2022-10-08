@@ -41,7 +41,7 @@ const InputCard = ({ listId, type }) => {
           <CancelIcon width={"15px"} onClick={() => setIsOpen(!isOpen)} />
         </div>
       </Collapse>
-      <Collapse in={!isOpen}>
+      <Collapse in={!isOpen} id="addcard">
         <div
           className="list_footer flex pt-2 text-slate-500 bg-gray-200 rounded p-2 cursor-pointer"
           onClick={() => setIsOpen(!isOpen)}

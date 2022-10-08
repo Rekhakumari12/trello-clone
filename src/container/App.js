@@ -13,15 +13,20 @@ function App() {
       ? JSON.parse(localStorage.getItem("data"))
       : JsonData
   );
-
-  const addCard = (title, listId) => {
+  let updatedData;
+  const addCard = (title, listId, description) => {
+    console.log(title, listId, description)
+    const list = data.lists[listId];
     let newCard = {
       id: new Date().getTime().toString(),
       cardName: title,
+      listId: listId,
+      listName: list.listName,
+      description: description,
+      createdAt: new Date().toLocaleString()
     };
-    const list = data.lists[listId];
     list.cards = [...list.cards, newCard];
-    const updatedData = {
+    updatedData = {
       ...data,
       lists: {
         ...data.lists,
@@ -32,7 +37,6 @@ function App() {
     setData(updatedData);
   };
 
-  console.log(data)
   const addList = (title) => {
     const newListId = new Date().getTime().toString()
     let updatedList = {
@@ -40,7 +44,7 @@ function App() {
       listName: title,
       cards: []
     }
-    const updatedData = {
+    updatedData = {
       ...data,
       listIds: [...data.listIds, newListId],
       lists: {
@@ -61,26 +65,27 @@ function App() {
       const newListIds = data.listIds
       newListIds.splice(source.index, 1)
       newListIds.splice(destination.index, 0, draggableId)
-      // const draggingList = data.lists[source.droppableId]
-      // const updatedState = {
-      //   ...data,
-      //   lists: {
-      //     [destination.id]
-      //   }
-
-      // }
-
+      updatedData = {
+        ...data,
+        listIds: [...new Set([...data.listIds, draggableId])]
+      }
+      localStorage.setItem("data", JSON.stringify(updatedData));
+      setData(updatedData)
       return
     }
 
     const sourceList = data.lists[source.droppableId]
     const destinationList = data.lists[destination.droppableId]
     const draggingCard = sourceList.cards.filter(card => card.id === draggableId)[0]
-    let updatedState;
     sourceList.cards.splice(source.index, 1)
-    destinationList.cards.splice(destination.index, 0, draggingCard)
+    let updatedCard = {
+      ...draggingCard,
+      listId: destinationList.id,
+      listName: destinationList.listName,
+    };
+    destinationList.cards.splice(destination.index, 0, updatedCard)
     if (source.droppableId === destination.droppableId) {
-      updatedState = {
+      updatedData = {
         ...data,
         lists: {
           ...data.lists,
@@ -88,7 +93,7 @@ function App() {
         }
       }
     } else {
-      updatedState = {
+      updatedData = {
         ...data,
         lists: {
           ...data.lists,
@@ -97,14 +102,14 @@ function App() {
         }
       }
     }
-    localStorage.setItem("data", JSON.stringify(updatedState));
-    setData(updatedState)
+    localStorage.setItem("data", JSON.stringify(updatedData));
+    setData(updatedData)
   }
 
-
+  console.log(data)
   return (
     <BoardWrapper>
-      <StoreApi.Provider value={{ addCard, addList }}>
+      <StoreApi.Provider value={{ addCard, addList, setData }}>
         <DragDropContext onDragEnd={onDragEnd}>
           <Fragment key={data.id}>
             <div className="board_header mb-4 text-2xl font-bold text-white">
@@ -118,7 +123,7 @@ function App() {
                     return (
                       <List list={list} setData={setData} key={list.id} data={data} index={idx}>
                         {list.cards.map((card, idx) => {
-                          return <Card card={card} key={card.id} index={idx} />;
+                          return <Card card={card} key={card.id} index={idx} data={data} />;
                         })}
                       </List>
                     );
@@ -138,3 +143,8 @@ function App() {
 }
 
 export default App;
+// Todo
+/** check why description not updating
+ * check on drag why list name not updating inside card
+ * align-items: center; to description
+ */

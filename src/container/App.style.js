@@ -9,7 +9,7 @@ export const BoardWrapper = styled.div`
     gap: 10px;
     li {
       border-radius: 3px;
-      width: 280px;
+      width: 280px!important;
     }
   }
   textarea {

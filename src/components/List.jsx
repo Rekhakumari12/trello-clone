@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import InputCard from "./InputCard";
+import SmallButton from "./SmallButton";
 
 const List = ({ children, setData, data, list, index }) => {
   const [listTitle, setListTitle] = useState();
@@ -26,12 +27,7 @@ const List = ({ children, setData, data, list, index }) => {
                   onClick={() => setIsEdit(true)}
                 />
                 {isEdit && (
-                  <button
-                    className="border border-2 px-2 rounded bg-gray-200 mb-1"
-                    onClick={handleEdit}
-                  >
-                    save
-                  </button>
+                  <SmallButton name="save" handleClick={handleEdit} />
                 )}
                 {children}
                 <InputCard listId={list.id} />

@@ -15,7 +15,7 @@ const List = ({ children, setData, data, list }) => {
   return (
     <Droppable droppableId={list.id}>
       {(provided) => (
-        <li ref={provided.innerRef} {...provided.droppableProps} className="list p-2 pb-3 bg-gray-300 rounded h-fit">
+        <li ref={provided.innerRef} {...provided.droppableProps} className="list py-3 px-4 bg-gray-300 rounded h-fit">
           <ReactTextareaAutosize
             defaultValue={list.listName}
             onChange={(e) => setListTitle(e.target.value)}

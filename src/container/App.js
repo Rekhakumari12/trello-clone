@@ -60,17 +60,28 @@ function App() {
     const sourceList = data.lists[source.droppableId]
     const destinationList = data.lists[destination.droppableId]
     const draggingCard = sourceList.cards.filter(card => card.id === draggableId)[0]
+    let updatedState
+    sourceList.cards.splice(source.index, 1)
+    destinationList.cards.splice(destination.index, 0, draggingCard)
     if (source.droppableId === destination.droppableId) {
-      sourceList.cards.splice(source.index, 1)
-      destinationList.cards.splice(destination.index, 0, draggingCard)
-    }
-    const updatedState = {
-      ...data,
-      lists: {
-        ...data.lists,
-        [sourceList.id]: destinationList
+      updatedState = {
+        ...data,
+        lists: {
+          ...data.lists,
+          [sourceList.id]: destinationList
+        }
+      }
+    } else {
+      updatedState = {
+        ...data,
+        lists: {
+          ...data.lists,
+          [sourceList.id]: sourceList,
+          [destinationList.id]: destinationList
+        }
       }
     }
+
     setData(updatedState)
   }
   return (

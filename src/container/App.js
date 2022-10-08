@@ -105,8 +105,6 @@ function App() {
     localStorage.setItem("data", JSON.stringify(updatedData));
     setData(updatedData)
   }
-
-  console.log(data)
   return (
     <BoardWrapper>
       <StoreApi.Provider value={{ addCard, addList, setData }}>

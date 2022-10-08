@@ -22,15 +22,12 @@ const Card = ({ card, index, data }) => {
   const [isEdit, setIsEdit] = useState(false);
   const { setData } = useContext(storeApi);
   const handleSubmit = () => {
-    data.lists[card.listId].cards.description = description;
-    console.log(card.id, data)
-    let updatedData = data.lists[card.listId].cards.filter((c) => {
+    data.lists[card.listId].cards.filter((c) => {
       if (c.id === card.id) {
         console.log(c)
         return c.description = description;
       }
     })
-    console.log(updatedData)
     setData(data);
     localStorage.setItem("data", JSON.stringify(data));
     setIsEdit(false);
@@ -54,7 +51,7 @@ const Card = ({ card, index, data }) => {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
+              <Typography id="modal-modal-title" variant="h6" component="h2" className='font-extrabold'>
                 {card.cardName}
               </Typography>
               <Typography variant="caption" display="block" gutterBottom>
@@ -65,7 +62,7 @@ const Card = ({ card, index, data }) => {
                 <TextareaAutosize
                   className='mr-2'
                   placeholder="Enter description..."
-                  style={{ width: 200, border: '1px solid gray', padding: '3px 5px', borderRadius: "4px" }}
+                  style={{ width: 250, border: '1px solid gray', padding: '3px 5px', borderRadius: "4px" }}
                   onChange={(e) => setDesc(e.target.value)}
                   onClick={() => setIsEdit(true)}
                   defaultValue={description}

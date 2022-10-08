@@ -61,7 +61,7 @@ const Card = ({ card, index, data }) => {
                 Status in <u>{card.listName}</u><br />
                 Created at <u>{card.createdAt}</u>
               </Typography><br />
-              <div className='flex'>
+              <div className='flex items-center'>
                 <TextareaAutosize
                   className='mr-2'
                   placeholder="Enter description..."

@@ -14,6 +14,7 @@ const List = ({ children, setData, data, list, index }) => {
     } else {
       data.lists[listId].listName = 'Please enter card name ';
     }
+    //sending same referenace of data that why page not updating 
     await setData(data);
     localStorage.setItem("data", JSON.stringify(data));
     setIsEdit(false);

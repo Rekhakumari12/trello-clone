@@ -121,7 +121,7 @@ function App() {
                     return (
                       <List list={list} setData={setData} key={list.id} data={data} index={idx}>
                         {list.cards.map((card, idx) => {
-                          return <Card card={card} key={card.id} index={idx} data={data} />;
+                          return <Card card={card} key={card.id} index={idx} data={data} addCard={addCard} />;
                         })}
                       </List>
                     );

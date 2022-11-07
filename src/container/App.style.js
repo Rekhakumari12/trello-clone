@@ -32,10 +32,27 @@ export const BoardWrapper = styled.div`
     outline: none;
     border-radius: 5px;
   }
+  .card{
+    overflow-wrap: break-word;
+    text-transform: capitalize;
+  }
+`;
+export const SpanText = styled.div`
+  color: gray;
+`
+export const TextAreaWrapper = styled.div`
+  .area-editable{
+    padding: 10px;
+    border: 2px solid rgb(0 0 0 / 9%);
+    border-radius: 5px;
+    background-color:transparent ;
+    font-weight: bold;
+    text-transform:capitalize ;
+    &:focus-visible{
+      border: 2px solid rgb(12 12 209 / 39%);
+      outline: none;
+    }
+  }
 `;
 
-export const BoardHeader = styled.div``;
 
-// export const List = styled.li`
-
-// `

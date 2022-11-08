@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, memo } from "react";
 import { Collapse } from "@mui/material";
 import { ReactComponent as PlusIcon } from "../assets/plus.svg";
 import { ReactComponent as CancelIcon } from "../assets/cancel.svg";
@@ -54,4 +54,4 @@ const InputCard = ({ listId, type }) => {
   );
 };
 
-export default InputCard;
+export default memo(InputCard);

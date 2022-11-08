@@ -58,9 +58,12 @@ const CardModal = ({ isOpen, setIsOpen, card, data, setData }) => {
         </TextAreaWrapper>
         <br />
         <Typography variant="caption" display="block" gutterBottom>
-          Status in <u>{card.listName}</u>
-          <br />
-          Created at <u>{card.createdAt}</u>
+          <Typography variant="body" marginRight={1}>
+            Status: <span className="rounded-full bg-blue-400 py-1 px-2 text-white">{card.listName}</span>
+          </Typography>
+          <Typography variant="body">
+            Created At:  <span className="rounded-full bg-blue-600 py-1 px-2 text-white">{card.createdAt}</span>
+          </Typography>
         </Typography>
         <br />
         <div className="flex items-center">

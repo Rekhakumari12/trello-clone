@@ -112,8 +112,10 @@ function App() {
       <StoreApi.Provider value={{ addCard, addList, setData }}>
         <DragDropContext onDragEnd={onDragEnd}>
           <Fragment key={data.id}>
-            <div className="board_header mb-4 text-2xl font-bold text-white">
-              {data.boardName}
+            <div className="text-5xl font-extrabold my-3">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">
+                {data.boardName}
+              </span>
             </div>
             <Droppable droppableId="board" type="list" direction="horizontal">
               {(provided) => (

@@ -1,17 +1,22 @@
-import { BoardWrapper } from "./App.style";
-import { Fragment, useState, memo } from "react";
-import List from "../components/List";
-import StoreApi from "../utils/storeApi";
-import JsonData from "../utils/data";
-import InputCard from "../components/InputCard";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { BoardWrapper } from './App.style';
+import { useState, memo } from 'react';
+import List from '../components/List';
+import StoreApi from '../utils/storeApi';
+import JsonData from '../utils/data';
+import InputCard from '../components/InputCard';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 function App() {
-  const [data, setData] = useState(
-    localStorage.getItem("data")
-      ? JSON.parse(localStorage.getItem("data"))
-      : JsonData
-  );
+  const [data, setData] = useState(() => {
+    const savedData = localStorage.getItem('data');
+    const initialData = savedData ? JSON.parse(savedData) : JsonData;
+    if (initialData.boardName === 'TrelloClone') {
+      const renamedData = { ...initialData, boardName: 'Website Redesign' };
+      localStorage.setItem('data', JSON.stringify(renamedData));
+      return renamedData;
+    }
+    return initialData;
+  });
   const [reRender, setReRender] = useState(false);
   let updatedData;
   const addCard = (title, listId, description) => {
@@ -33,7 +38,7 @@ function App() {
         [listId]: list,
       },
     };
-    localStorage.setItem("data", JSON.stringify(updatedData));
+    localStorage.setItem('data', JSON.stringify(updatedData));
     setData(updatedData);
   };
 
@@ -52,7 +57,7 @@ function App() {
         [newListId]: updatedList,
       },
     };
-    localStorage.setItem("data", JSON.stringify(updatedData));
+    localStorage.setItem('data', JSON.stringify(updatedData));
     setData(updatedData);
   };
 
@@ -60,7 +65,7 @@ function App() {
     const { destination, source, draggableId, type } = result;
 
     if (!destination) return;
-    if (type === "list") {
+    if (type === 'list') {
       console.log(destination, source, draggableId, type);
       const newListIds = data.listIds;
       newListIds.splice(source.index, 1);
@@ -69,7 +74,7 @@ function App() {
         ...data,
         listIds: [...new Set([...data.listIds, draggableId])],
       };
-      localStorage.setItem("data", JSON.stringify(updatedData));
+      localStorage.setItem('data', JSON.stringify(updatedData));
       setData(updatedData);
       return;
     }
@@ -77,7 +82,7 @@ function App() {
     const sourceList = data.lists[source.droppableId];
     const destinationList = data.lists[destination.droppableId];
     const draggingCard = sourceList.cards.filter(
-      (card) => card.id === draggableId
+      (card) => card.id === draggableId,
     )[0];
     sourceList.cards.splice(source.index, 1);
     let updatedCard = {
@@ -104,23 +109,34 @@ function App() {
         },
       };
     }
-    localStorage.setItem("data", JSON.stringify(updatedData));
+    localStorage.setItem('data', JSON.stringify(updatedData));
     setData(updatedData);
   };
   return (
     <BoardWrapper>
       <StoreApi.Provider value={{ addCard, addList, setData }}>
         <DragDropContext onDragEnd={onDragEnd}>
-          <Fragment key={data.id}>
-            <div className="text-5xl font-extrabold my-3">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">
-                {data.boardName}
-              </span>
+          <aside className='sidebar'>
+            <div className='brand'>
+              <span className='brandMark'>T</span>
+              <span>TaskFlow AI</span>
             </div>
-            <Droppable droppableId="board" type="list" direction="horizontal">
+            <nav className='sidebarNav' aria-label='Main navigation'>
+              <button className='navItem active' type='button'>
+                <span className='navIcon' aria-hidden='true' />
+                <span>Board</span>
+              </button>
+            </nav>
+          </aside>
+          <main className='mainContent' key={data.id}>
+            <header className='boardHeader'>
+              <div className='boardIcon' aria-hidden='true' />
+              <h1>{data.boardName}</h1>
+            </header>
+            <Droppable droppableId='board' type='list' direction='horizontal'>
               {(provided) => (
                 <ul
-                  className="board"
+                  className='board'
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                 >
@@ -139,13 +155,13 @@ function App() {
                     );
                   })}
                   {provided.placeholder}
-                  <li className="list">
-                    <InputCard type="list" />
+                  <li className='addListPanel'>
+                    <InputCard type='list' />
                   </li>
                 </ul>
               )}
             </Droppable>
-          </Fragment>
+          </main>
         </DragDropContext>
       </StoreApi.Provider>
     </BoardWrapper>

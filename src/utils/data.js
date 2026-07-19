@@ -1,7 +1,7 @@
 
 const JsonData = {
   id: 'board',
-  boardName: 'TrelloClone',
+  boardName: 'Website Redesign',
   lists: {
     'list-1': {
       id: 'list-1',
